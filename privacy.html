@@ -5,110 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — AutoPilot Publisher</title>
     <meta name="description" content="Privacy Policy for AutoPilot Publisher — how we handle your data when using the TikTok Content Posting API.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #fe2c55;
-            --bg: #0f0f0f;
-            --bg-card: #1a1a2e;
-            --text: #e8e8e8;
-            --text-muted: #a0a0b0;
-            --accent: #25f4ee;
-            --border: #2a2a3e;
+            --cyan: #25f4ee;
+            --bg: #050508;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text: #f0f0f5;
+            --text-secondary: #b4b4c8;
+            --text-muted: #6e6e85;
+            --border: rgba(255, 255, 255, 0.06);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #5ffff8; }
+
+        /* Background */
+        .bg-mesh {
+            position: fixed; inset: 0; z-index: -1; overflow: hidden;
+        }
+        .bg-mesh::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+            background: var(--primary);
+            top: -150px; right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, 40px) scale(1.05); }
+        }
+
+        /* Nav */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100; padding: 0 2rem;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(20px) saturate(1.5);
+            -webkit-backdrop-filter: blur(20px) saturate(1.5);
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
-        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); }
-        .logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 1.5rem; }
-        .nav-links a { color: var(--text-muted); font-size: 0.9rem; }
+        .nav-inner {
+            max-width: 1120px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; height: 64px;
+        }
+        .logo {
+            font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em;
+            color: var(--text); display: flex; align-items: center; gap: 0.5rem;
+        }
+        .logo-icon {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--primary), #ff6b8a);
+            border-radius: 7px; display: flex; align-items: center; justify-content: center;
+        }
+        .logo-icon svg { width: 16px; height: 16px; fill: white; }
+        .logo em { font-style: normal; color: var(--primary); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
         .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+        /* Content */
+        .page-header {
+            padding: 4rem 2rem 0;
+            max-width: 760px; margin: 0 auto;
+        }
+        .page-header .breadcrumb {
+            font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;
+        }
+        .page-header .breadcrumb a { color: var(--text-muted); }
+        .page-header .breadcrumb a:hover { color: var(--text); }
+        .page-header .breadcrumb span { color: var(--text-secondary); }
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem;
+        }
+        .page-header .updated {
+            color: var(--text-muted); font-size: 0.85rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .page-header .updated svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; }
+
         .content {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 3rem 2rem 5rem;
-        }
-        .content h1 {
-            font-size: 2.25rem;
-            margin-bottom: 0.25rem;
-        }
-        .updated {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 2.5rem;
+            max-width: 760px; margin: 0 auto; padding: 2.5rem 2rem 5rem;
         }
         .content h2 {
-            font-size: 1.3rem;
-            margin-top: 2.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--accent);
+            font-size: 1.2rem; font-weight: 700; margin-top: 2.75rem; margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .content h2::before {
+            content: '';
+            width: 3px; height: 1.2em;
+            background: linear-gradient(135deg, var(--primary), #ff6b8a);
+            border-radius: 2px;
+            flex-shrink: 0;
         }
         .content p, .content li {
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            color: var(--text-secondary); margin-bottom: 0.75rem; font-size: 0.92rem;
         }
-        .content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .content ul { padding-left: 1.25rem; margin-bottom: 1rem; }
         .content li { margin-bottom: 0.4rem; }
-        .content strong { color: var(--text); }
+        .content li::marker { color: var(--primary); }
+        .content strong { color: var(--text); font-weight: 600; }
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0 1.5rem;
+            width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem;
+            border-radius: 10px; overflow: hidden;
+            border: 1px solid var(--border);
         }
         th, td {
-            text-align: left;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border);
-            font-size: 0.9rem;
+            text-align: left; padding: 0.8rem 1rem; font-size: 0.88rem;
+            border-bottom: 1px solid var(--border);
         }
-        th { background: var(--bg-card); color: var(--text); font-weight: 600; }
-        td { color: var(--text-muted); }
+        th { background: rgba(255,255,255,0.03); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+
+        /* Footer */
         footer {
-            padding: 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
+            padding: 2rem; border-top: 1px solid var(--border);
+            text-align: center; color: var(--text-muted); font-size: 0.78rem;
+            max-width: 760px; margin: 0 auto;
         }
+        footer a { color: var(--text-muted); margin: 0 0.75rem; }
+
         @media (max-width: 640px) {
+            .page-header { padding: 3rem 1.25rem 0; }
             .content { padding: 2rem 1.25rem 3rem; }
-            .content h1 { font-size: 1.75rem; }
-            nav { padding: 0.75rem 1rem; }
+            .page-header h1 { font-size: 1.75rem; }
+            nav { padding: 0 1rem; }
+            .nav-links { gap: 1.25rem; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-mesh"></div>
+
     <nav>
-        <a href="index.html" class="logo" style="text-decoration:none">AutoPilot <span>Publisher</span></a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
+        <div class="nav-inner">
+            <a href="index.html" class="logo" style="text-decoration:none">
+                <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                Auto<em>Pilot</em>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
         </div>
     </nav>
 
-    <div class="content">
+    <div class="page-header">
+        <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>Privacy Policy</span></div>
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: April 28, 2026</p>
+        <div class="updated">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Last updated: April 28, 2026
+        </div>
+    </div>
 
+    <div class="content">
         <h2>1. Introduction</h2>
         <p>AutoPilot Publisher ("the App") respects your privacy. This Privacy Policy explains what data we collect, how we use it, and your rights.</p>
 
@@ -152,7 +222,7 @@
         <h2>6. Your Rights</h2>
         <p>You may at any time:</p>
         <ul>
-            <li><strong>Revoke access:</strong> Go to TikTok → Settings → Security → Manage app permissions → Remove AutoPilot Publisher.</li>
+            <li><strong>Revoke access:</strong> Go to TikTok &rarr; Settings &rarr; Security &rarr; Manage app permissions &rarr; Remove AutoPilot Publisher.</li>
             <li><strong>Request deletion:</strong> Contact us to delete all stored tokens and data.</li>
         </ul>
         <p>Upon revocation, all stored tokens are invalidated immediately.</p>
@@ -171,7 +241,7 @@
     </div>
 
     <footer>
-        &copy; 2026 AutoPilot Publisher. All rights reserved.
+        <p>&copy; 2026 AutoPilot Publisher &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a> <a href="terms.html">Terms</a></p>
     </footer>
 </body>
 </html>
