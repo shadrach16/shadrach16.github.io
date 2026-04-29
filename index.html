@@ -1,1 +1,376 @@
-<html><body><h1>AutoPilot Publisher</h1><p>Content management tool for TikTok creators.</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPilot Publisher — Content Publishing Platform</title>
+    <meta name="description" content="AutoPilot Publisher is a content management platform that helps creators publish original content to TikTok via the official Content Posting API.">
+    <style>
+        :root {
+            --primary: #fe2c55;
+            --primary-dark: #d91a43;
+            --bg: #0f0f0f;
+            --bg-card: #1a1a2e;
+            --bg-section: #111122;
+            --text: #e8e8e8;
+            --text-muted: #a0a0b0;
+            --accent: #25f4ee;
+            --border: #2a2a3e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--bg) 0%, #1a0a1e 50%, var(--bg) 100%);
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+        .hero h1 span { color: var(--primary); }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(254, 44, 85, 0.12);
+            border: 1px solid rgba(254, 44, 85, 0.3);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        .badge svg { width: 14px; height: 14px; }
+
+        /* Features */
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .features .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 4rem 2rem;
+            background: var(--bg-section);
+        }
+        .how-it-works .inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .step {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        .step-num {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .step-content h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+        .step-content p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Security */
+        .security {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .security h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .security .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .sec-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .sec-item .icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .sec-item h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .sec-item p { color: var(--text-muted); font-size: 0.82rem; }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .footer-brand .logo { margin-bottom: 0.5rem; }
+        .footer-brand p { color: var(--text-muted); font-size: 0.85rem; max-width: 300px; }
+        .footer-links h4 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .footer-links a { display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.4rem; }
+        .footer-links a:hover { color: var(--text); }
+        .footer-bottom {
+            max-width: 1000px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 4rem 1.25rem 3rem; }
+            nav { padding: 0.75rem 1rem; }
+            .footer-inner { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">AutoPilot <span>Publisher</span></div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#security">Security</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="badge">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            Official TikTok Content Posting API
+        </div>
+        <h1>Publish Content to <span>TikTok</span><br>With Confidence</h1>
+        <p>AutoPilot Publisher is a creator-focused content management platform that publishes original photo and video content to TikTok through the official Content Posting API.</p>
+    </section>
+
+    <section class="features" id="features">
+        <h2>What AutoPilot Publisher Does</h2>
+        <p class="subtitle">Built for creators who want a streamlined publishing workflow</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(254,44,85,0.15);">📸</div>
+                <h3>Photo Slideshow Publishing</h3>
+                <p>Upload multi-image photo slideshows directly to TikTok with captions, hashtags, and privacy settings — all via the official API.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(37,244,238,0.15);">🎬</div>
+                <h3>Video Content Posting</h3>
+                <p>Publish short-form video content to TikTok with proper metadata, disclosure labels, and creator-controlled privacy levels.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(255,200,50,0.15);">📅</div>
+                <h3>Scheduled Publishing</h3>
+                <p>Queue content for optimal posting times. Schedule posts in advance so your content goes live when your audience is most active.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(100,200,100,0.15);">🔒</div>
+                <h3>OAuth 2.0 Authorization</h3>
+                <p>Secure TikTok login via official OAuth flow. We never see your password — you authorize directly through TikTok.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(160,100,255,0.15);">🏷️</div>
+                <h3>AI Content Disclosure</h3>
+                <p>Automatically labels AI-generated content as required by TikTok's policies, keeping your account compliant.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(255,130,80,0.15);">⚙️</div>
+                <h3>Creator Privacy Controls</h3>
+                <p>Respects TikTok creator settings — queries your available privacy levels before posting and applies your chosen visibility.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="inner">
+            <h2>How It Works</h2>
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Authorize with TikTok</h3>
+                    <p>Log in through TikTok's official OAuth 2.0 flow. You grant publishing permission directly on TikTok's site — we never access your password.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Prepare Your Content</h3>
+                    <p>Create your photos or videos. AutoPilot Publisher handles formatting, captions, hashtags, and privacy settings for TikTok's API requirements.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Publish to TikTok</h3>
+                    <p>Content is uploaded through TikTok's official Content Posting API. Photo slideshows and videos are posted with full metadata and proper disclosures.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>Track & Manage</h3>
+                    <p>Monitor published content status. All posts are tracked with publish timestamps and TikTok post IDs for your records.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="security" id="security">
+        <h2>Security & Privacy</h2>
+        <p class="subtitle">Your data protection is our priority</p>
+        <div class="security-grid">
+            <div class="sec-item">
+                <div class="icon">🔐</div>
+                <h4>Encrypted Token Storage</h4>
+                <p>OAuth tokens stored securely with encryption. Never exposed in logs or source code.</p>
+            </div>
+            <div class="sec-item">
+                <div class="icon">🚫</div>
+                <h4>No Data Selling</h4>
+                <p>We never sell, share, or transfer your data to third parties. Period.</p>
+            </div>
+            <div class="sec-item">
+                <div class="icon">⏱️</div>
+                <h4>Auto-Expiring Tokens</h4>
+                <p>Access tokens expire every 24 hours and are automatically refreshed only when needed.</p>
+            </div>
+            <div class="sec-item">
+                <div class="icon">🗑️</div>
+                <h4>Revoke Anytime</h4>
+                <p>Remove access instantly from TikTok settings. All stored tokens are invalidated immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo">AutoPilot <span>Publisher</span></div>
+                <p>A content management platform for creators, built on TikTok's official Content Posting API.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="mailto:autopilotpublisher@proton.me">autopilotpublisher@proton.me</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 AutoPilot Publisher. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
